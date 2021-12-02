@@ -1,23 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+
+import { useState } from "react";
+import FormProfile from "./components/FormProfile/FormProfile";
+import ModalWindow from "./components/ModalWindow/ModalWindow";
 
 function App() {
+  const [userData, setUserData] = useState("");
+  const [modalState, setModalState] = useState(false);
+
+  // Gather data from Form component and set modalState to true
+  const onSubmitDataHandler = (userDataForm) => {
+    setUserData(userDataForm);
+    setModalState(true);
+    console.log(userData);
+  }
+
+  
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <FormProfile onSubmitData={onSubmitDataHandler}/>
+      <ModalWindow userData = {userData} modalState={modalState}/>
     </div>
   );
 }
